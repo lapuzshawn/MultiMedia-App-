@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS social_db;
+CREATE TABLE social_db;
