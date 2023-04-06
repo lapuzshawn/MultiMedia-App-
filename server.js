@@ -13,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Create a Handlebars instance
-const hbs = exphbs();
+const hbs = exphbs.create({ defaultLayout: null });
 
 // Set up session configuration
 const sess = {
@@ -30,7 +30,7 @@ const sess = {
 app.use(session(sess));
 
 // Set up Handlebars as the view engine
-app.engine('handlebars', hbs);
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Set up middleware for parsing request bodies and serving static files
