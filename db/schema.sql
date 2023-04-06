@@ -1,2 +1,2 @@
-DROP TABLE IF EXISTS social_db;
-CREATE TABLE social_db;
+DROP DATABASE IF EXISTS social_db;
+CREATE DATABASE social_db;
