@@ -1,9 +1,3 @@
-
-<link rel="stylesheet" href="/css/login.css">
-
-<h2>Welcome!</h2>
-<p>Please <a href="/signup">signup</a> or <a href="/login">login</a> to continue.</p>
-
 <div class="signup">
     <form id="signup-form">
         <label id="signupLabel"></label>
@@ -39,36 +33,9 @@
         </div>
         <br></br>
     <button type="submit" id="signup-submit">Sign Up</button>
+    <p>Already have an account? <a href="/login">Sign in</a></p>
     </form>
 </div>
 
-<div class="login">
-    <form id="login-form">
-        <label id="loginLabel"></label>
-        <h2 class="title">Log In</h2>
-        <div class="input-field">
-        <input
-            id="username-input-login"
-            type="text"
-            name="username"
-            placeholder="Username"
-            required=""
-        >
-        </div>
-        <br></br>
-        <div class="input-field">
-        <input
-            id="password-input-login"
-            type="password"
-            name="password"
-            placeholder="Password"
-            required=""
-        >
-        </div>
-        <br></br>
-    <button type="submit" id="login-submit">Log In</button>
-    </form>
-</div>
 
-<script src="/js/login.js"></script>
 <script src="/js/signup.js"></script>

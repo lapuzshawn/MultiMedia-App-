@@ -3,7 +3,9 @@ const { User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
-	res.render('home');
+	res.render('home', {
+		isHome: true,
+	});
 });
 
 router.get('/login', (req, res) => {
@@ -11,7 +13,9 @@ router.get('/login', (req, res) => {
 		res.redirect('/');
 		return;
 	}
-	res.render('signup&login');
+	res.render('login', {
+		isHome: false,
+	});
 });
 
 router.get('/signup', (req, res) => {
@@ -19,7 +23,9 @@ router.get('/signup', (req, res) => {
 		res.redirect('/');
 		return;
 	}
-	res.render('signup');
+	res.render('signup', {
+		isHome: false,
+	});
 });
 
 router.get('/protected', withAuth, (req, res) => {

@@ -1,0 +1,49 @@
+.login,
+.signup {
+	margin-top: 100px;
+}
+
+#login-form h2,
+#signup-form h2 {
+	display: flex;
+	justify-content: center;
+	font-size: 30px;
+	font-weight: lighter;
+	margin-bottom: 30px;
+}
+
+#username-input-login,
+#password-input-login,
+#name-input-signup,
+#username-input-signup,
+#password-input-signup {
+	border: 2px solid #333;
+	padding: 10px;
+	width: 300px;
+}
+
+#login-submit,
+#signup-submit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #000;
+	color: #fff;
+	border: none;
+	padding: 15px;
+	font-size: 15px;
+	border-radius: 5px;
+	width: 200px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+
+#login-submit:hover {
+	background-color: #333;
+}
+
+.login p,
+.signup p {
+	margin-top: 30px;
+}
