@@ -1,40 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MultiMedia App</title>
-</head>
+<html lang='en'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<title>Multi-Media</title>
+		<link rel='stylesheet' href='/css/style.css' />
+		<link rel='stylesheet' href='/css/login&signup.css' />
 
-<body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="#" id="logout-link">Logout</a></li>
-        </ul>
-    </nav>
-    <header>
-        <h1><a href="/">MultiMedia App</a></h1>
-    </header>
+	</head>
 
-    <main>
-        {{{body}}}
-    </main>
-</body>
+	<body>
+		{{#if isHome}}
+			<nav>
+				<form action='/search'>
+					<input
+						type='search'
+						name='query'
+						id='search-input'
+						placeholder='SEARCH FOR USERS'
+					/>
+				</form>
+				<div class='login-signup'>
+					<a href='/login'><button id='login' type='submit'>Login</button></a>
+
+					<a href='/signup'>
+						<button id='signup' type='submit'>Signup</button></a>
+				</div>
+			</nav>
+		{{else}}
+			<style>
+				nav { display: flex; justify-content: center; align-items: center;
+				border-bottom: 2px solid;} h1 {font-size: 45px; font-weight: lighter;
+				color: black;}
+
+			</style>
+			<nav>
+				<a href='/' style='text-decoration: none;'><h1>Multi-Media</h1></a>
+
+			</nav>
+		{{/if}}
+		<main>
+			{{{body}}}
+		</main>
+	</body>
 </html>
-
-<script>
-  const logout = async function() { 
-    const response = await fetch('/api/user/logout', { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' }, 
-        }); 
-        if (response.ok) { document.location.replace('/login'); 
-        } else { 
-            alert('Failed to log out'); 
-        } 
-        };
-        document.querySelector('#logout-link').addEventListener('click', logout);
-</script>

@@ -1,0 +1,86 @@
+body {
+	background-color: white;
+	font-family: Arial, sans-serif;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 15px;
+}
+
+#search-input {
+	border-radius: 30px;
+	border: 2px solid #000;
+	padding: 5px;
+	font-size: 13px;
+	width: 300px;
+	margin-top: 10px;
+}
+
+#search-input::placeholder {
+	display: flex;
+	text-align: center;
+	color: #000;
+	font-weight: 750;
+}
+
+.login-signup button {
+	background-color: #000;
+	color: #fff;
+	border: none;
+	padding: 15px;
+	font-size: 15px;
+	border-radius: 5px;
+	width: 200px;
+	margin-left: 20px;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+
+.login-signup button:hover {
+	background-color: #333;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.link-container {
+	margin-top: 150px;
+}
+
+.link-container h1 {
+	font-size: 50px;
+	font-weight: 200;
+	text-align: center;
+}
+
+.link-container p {
+	text-align: center;
+	font-size: 17px;
+	margin-top: -15px;
+	margin-bottom: 35px;
+}
+
+#users-link input {
+	border: 2px solid #000;
+	padding: 10px;
+	width: 350px;
+	font-size: 15px;
+	margin-right: 25px;
+}
+
+#claim-link {
+	background-color: #000;
+	color: #fff;
+	border: none;
+	padding: 15px;
+	border-radius: 5px;
+	width: 150px;
+	cursor: pointer;
+}
