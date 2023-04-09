@@ -1,6 +1,5 @@
 body {
-	background-color: white;
-	font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif; 
 }
 
 nav {
@@ -84,3 +83,4 @@ main {
 	width: 150px;
 	cursor: pointer;
 }
+
