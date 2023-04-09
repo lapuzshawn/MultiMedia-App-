@@ -3,15 +3,21 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars-hotreload');
+const http = require('http');
+const { Server } = require('socket.io');
 const routes = require('./controllers');
-exphbs.hotreload();
-
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+exphbs.hotreload();
 
 // Initialize Express and set up port
 const app = express();
 const PORT = process.env.PORT || 3001;
+// Create a server instance
+const server = http.createServer(app);
+
+// Create a Socket.IO instance
+const io = new Server(server);
 
 // Create a Handlebars instance
 const hbs = exphbs.create({
@@ -22,7 +28,7 @@ const hbs = exphbs.create({
 const sess = {
 	secret: 'Super secret secret',
 	cookie: {
-		maxAge: 300000,
+		maxAge: 3600000,
 		httpOnly: true,
 		secure: false,
 		sameSite: 'strict',
@@ -49,8 +55,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Set up routes
 app.use(routes);
 
+// Set up Socket.IO events
+io.on('connection', (socket) => {
+	console.log('A user has connected.');
+	socket.on('chat message', (message) => {
+		socket.broadcast.emit('receive-message', message);
+		console.log('message: ' + message);
+	});
+});
+
 // Sync the database and start the server
-app.listen(PORT, () => {
-	console.log(`App listening on port ${PORT}!`);
-	sequelize.sync({ force: false });
+sequelize.sync({ force: false }).then(() => {
+	server.listen(PORT, () => {
+		console.log(`App listening on port ${PORT}!`);
+	});
 });

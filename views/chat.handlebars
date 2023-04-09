@@ -1,10 +1,18 @@
-<html>
-	<head>
-		<title>Socket.IO Example</title>
-	</head>
-	<body>
-		<h1>Socket.IO Example</h1>
-		<script src='/js/socketio.js'></script>
-
-	</body>
-</html>
+<link rel='stylesheet' href='css/chat.css' />
+<div class='chat'>
+	<div class='messages'>
+		<!-- Messages will be displayed here -->
+		<p>asdfsafasf</p>
+	</div>
+	<div class='input'>
+		<form id='chat-form'>
+			<input id='chat-input' type='text' placeholder='Type your message' />
+			<button id='send-message' type='submit'>Send</button>
+		</form>
+	</div>
+</div>
+<script src='/socket.io/socket.io.js'></script>
+<script
+	src='/js/client.js
+'
+></script>

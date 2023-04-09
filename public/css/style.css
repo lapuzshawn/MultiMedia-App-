@@ -26,14 +26,15 @@ nav {
 	font-weight: 750;
 }
 
-.login-signup button {
+#login,
+#signup {
 	background-color: #000;
 	color: #fff;
 	border: none;
 	padding: 15px;
 	font-size: 15px;
 	border-radius: 5px;
-	width: 200px;
+	width: 150px;
 	margin-left: 20px;
 	margin-bottom: 5px;
 	cursor: pointer;
@@ -82,5 +83,20 @@ main {
 	padding: 15px;
 	border-radius: 5px;
 	width: 150px;
+	cursor: pointer;
+}
+
+#logout-button,
+#messenger,
+.profile {
+	background-color: #000;
+	color: #fff;
+	border: none;
+	padding: 15px;
+	font-size: 15px;
+	border-radius: 5px;
+	width: 150px;
+	margin-left: 20px;
+	margin-bottom: 5px;
 	cursor: pointer;
 }

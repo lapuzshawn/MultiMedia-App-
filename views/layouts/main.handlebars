@@ -6,6 +6,10 @@
 		<title>Multi-Media</title>
 		<link rel='stylesheet' href='/css/style.css' />
 		<link rel='stylesheet' href='/css/login&signup.css' />
+		<link
+			href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
+			rel='stylesheet'
+		/>
 
 	</head>
 
@@ -21,10 +25,19 @@
 					/>
 				</form>
 				<div class='login-signup'>
-					<a href='/login'><button id='login' type='submit'>Login</button></a>
-
-					<a href='/signup'>
-						<button id='signup' type='submit'>Signup</button></a>
+					{{#if logged_in}}
+						<a href='/profile'><button class='profile'>
+								Profile</button></a>
+						<a href='/api/messages'><button id='messenger'>Messages</button></a>
+						<button id='logout-button'>Logout</button>
+						<script src='js/logout.js'></script>
+					{{else}}
+						<a href='/login'><button id='login' type='submit'>Login</button></a>
+						<a href='/signup'><button
+								id='signup'
+								type='submit'
+							>Signup</button></a>
+					{{/if}}
 				</div>
 			</nav>
 		{{else}}
@@ -42,5 +55,6 @@
 		<main>
 			{{{body}}}
 		</main>
+
 	</body>
 </html>

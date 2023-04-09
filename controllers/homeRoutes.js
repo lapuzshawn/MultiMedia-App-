@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 router.get('/', (req, res) => {
 	res.render('home', {
 		isHome: true,
+		logged_in: req.session.loggedIn,
 	});
 });
 
@@ -31,4 +32,9 @@ router.get('/signup', (req, res) => {
 router.get('/protected', withAuth, (req, res) => {
 	res.render('protected');
 });
+
+router.get('/chat', withAuth, (req, res) => {
+	res.render('chat');
+});
+
 module.exports = router;
