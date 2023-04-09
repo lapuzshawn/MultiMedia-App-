@@ -1,3 +1,9 @@
+body {
+  background-image: linear-gradient(to bottom, #abf62d, #cb96f1), linear-gradient(to bottom, #fff, #fff);
+  background-position: 0 0, 0 100px;
+  background-repeat: repeat-x;
+}
+
 .profile {
   width: 40%;
 }

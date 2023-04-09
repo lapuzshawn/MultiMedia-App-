@@ -54,8 +54,7 @@ main {
 }
 
 .link-container h1 {
-	font-size: 50px;
-	font-weight: 200;
+	font-size: 80px;
 	text-align: center;
 }
 
@@ -72,6 +71,7 @@ main {
 	width: 350px;
 	font-size: 15px;
 	margin-right: 25px;
+	text-align: center;
 }
 
 #claim-link {
