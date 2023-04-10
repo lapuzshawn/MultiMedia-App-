@@ -1,0 +1,143 @@
+body {
+  background-image: linear-gradient(to bottom, #abf62d, #cb96f1), linear-gradient(to bottom, #fff, #fff);
+  background-position: 0 0, 0 100px;
+  background-repeat: repeat-x;
+}
+
+.profile {
+  width: 40%;
+}
+
+.profile .profile-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile .profile-header_avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-image: url("https://www.w3schools.com/w3images/avatar5.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 128px;
+}
+
+.profile .profile-header_username {
+  justify-content: center;
+  text-align: center;
+  margin: 30px 0 0 0;
+}
+
+.profile .profile-header_description {
+  justify-content: center;
+  text-align: center;
+  margin: 20px 0 0 0;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.profile .profile-header_message {
+  justify-content: center;
+  text-align: center;
+
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-weight: 900;
+  font-size: 20px;
+
+  padding: 15px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #000;
+  margin: 0;
+  margin-top: 15px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.profile .social-links_title {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 30px 0 0 0;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.profile .social-links_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.profile .social-links_list_item {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  font-size: 15px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #000;
+  margin: 15px 0 0 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.profile .social-links_list_item_link {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+/* .profile .recent-posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem 3rem;
+  grid-template-rows: masonry;
+} */
+
+.profile .recent-posts {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -8px; /* Adjustment for the gutter */
+  width: 100%;
+}
+
+.profile .recent-posts_post {
+  flex: auto;
+  height: 250px;
+  min-width: 150px;
+  margin: 0 8px 8px 0; /* Some gutter */
+}
+
+.profile .recent-posts_post:nth-child(4n+1) {
+  width: 250px;
+}
+.profile .recent-posts_post:nth-child(4n+1):nth-child(4n+2) {
+  width: 325px;
+}
+.profile .recent-posts_post:nth-child(4n+1):nth-child(4n+3) {
+  width: 180px;
+}
+.profile .recent-posts_post:nth-child(4n+1):nth-child(4n+4) {
+  width: 380px;
+}
+
+.profile .recent-posts_post_img {
+  width: 100%;
+   object-fit: contain;
+   border-radius: 15px;
+}
