@@ -10,6 +10,9 @@
     </form>
     <div class="login-signup">
       {{#if loggedIn}}
+       <a href="/admin/{{user.userId}}">
+          <button id="admin" type="submit">Admin</button>
+        </a>
         <a href="/profile/{{user.userId}}">
           <button id="profile" type="submit">Profile</button>
         </a>
