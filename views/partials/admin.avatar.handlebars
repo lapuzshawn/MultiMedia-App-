@@ -1,7 +1,25 @@
 <div class="admin-header">
   <img src="{{profile.avatar}}" alt="admin Picture" class="admin-header_avatar"/>
-  <h1 class="admin-header_username">{{profile.name}}</h1>
+  <h1 class="admin-header_username">{{admin.name}}</h1>
+  <div class="input-field, admin-header_username">
+    <input
+        id="name-input-update"
+        type="name"
+        name="name"
+        placeholder="{{admin.name}}"
+        required=""
+    >
+  </div>
   <h2 class="admin-header_description">Influencer | San francisco, CA</h2>
+  <div class="input-field, admin-header_description">
+  <input
+      id="name-input-description"
+      type="name"
+      name="name"
+      placeholder="{{admin.name}}"
+      required=""
+  >
+  </div>
   {{#if viewMyProfile}}
   {{else}}
     <a class="admin-header_message" href="/message/{{admin.userId}}">Message</a>
