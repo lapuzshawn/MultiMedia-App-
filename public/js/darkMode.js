@@ -13,14 +13,14 @@ const disableDarkMode = () => {
 
     document.body.classList.remove('darkMode');
     
-    localStorage.setItem('darkMode', null)
+    localStorage.setItem('darkMode', 'disabled')
 }
 
-// if (darkMode === 'enabled') {
-//     enableDarkMode();
-// } else {
-//     disableDarkMode();
-// }
+if (darkMode === 'enabled') {
+    enableDarkMode();
+} else {
+    disableDarkMode();
+}
 
 darkModeToggle.addEventListener('click', () => {
     darkMode = localStorage.getItem('darkMode');
