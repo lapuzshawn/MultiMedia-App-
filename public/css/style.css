@@ -1,5 +1,5 @@
 body {
-	font-family: Arial, sans-serif; 
+	font-family: Arial, sans-serif;
 }
 
 nav {
@@ -9,20 +9,21 @@ nav {
 	margin: 15px;
 }
 .darkMode {
-	background-image: linear-gradient(to bottom, #436905, #5c446e), linear-gradient(to bottom, #fff, #fff);
-    background-position: 0 0, 0 100px;
-    background-repeat: repeat-x;
+	background-image: linear-gradient(to bottom, #436905, #5c446e),
+		linear-gradient(to bottom, #fff, #fff);
+	background-position: 0 0, 0 100px;
+	background-repeat: repeat-x;
 	color: #d3d3d3;
 }
 #darkmode-toggle {
 	width: 0;
 	height: 0;
-visibility: hidden;
+	visibility: hidden;
 }
 #darkmode-toggle-label {
 	width: 44px;
 	height: 25px;
-	position:relative;
+	position: relative;
 	display: inline-block;
 	background: #fff;
 	border-radius: 200px;
@@ -30,11 +31,11 @@ visibility: hidden;
 	transition: 1s;
 }
 #darkmode-toggle-label:after {
-	content: "";
+	content: '';
 	width: 22px;
 	height: 25px;
-	position: absolute;	
-	background: linear-gradient(180deg, #fff,#000);
+	position: absolute;
+	background: linear-gradient(180deg, #fff, #000);
 	border-radius: 180px;
 	box-shadow: 0px 5px 10px #000, 0px -5px 10px #fff;
 }
@@ -44,8 +45,8 @@ visibility: hidden;
 }
 #darkmode-toggle:checked + #darkmode-toggle-label:after {
 	left: 44px;
-	transform:translateX(-100%);
-	background: linear-gradient(180deg,#000,#fff)
+	transform: translateX(-100%);
+	background: linear-gradient(180deg, #000, #fff);
 }
 #search-input {
 	border-radius: 30px;
@@ -123,20 +124,18 @@ main {
 	cursor: pointer;
 }
 
-<<<<<<< HEAD
-#logout-button,
+#logout-link,
 #messenger,
-.profile {
+#profile,
+#admin {
 	background-color: #000;
 	color: #fff;
 	border: none;
 	padding: 15px;
 	font-size: 15px;
 	border-radius: 5px;
-	width: 150px;
+	width: 100px;
 	margin-left: 20px;
 	margin-bottom: 5px;
 	cursor: pointer;
 }
-=======
->>>>>>> 2dba7ae5a12b405f76f409bc4bb09a8b52b8d513
