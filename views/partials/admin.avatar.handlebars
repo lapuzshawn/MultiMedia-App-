@@ -1,0 +1,9 @@
+<div class="admin-header">
+  <img src="{{profile.avatar}}" alt="admin Picture" class="admin-header_avatar"/>
+  <h1 class="admin-header_username">{{profile.name}}</h1>
+  <h2 class="admin-header_description">Influencer | San francisco, CA</h2>
+  {{#if viewMyProfile}}
+  {{else}}
+    <a class="admin-header_message" href="/message/{{admin.userId}}">Message</a>
+  {{/if}}
+</div>
