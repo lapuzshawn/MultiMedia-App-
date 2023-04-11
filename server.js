@@ -3,11 +3,13 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars-hotreload');
+const http = require('http');
+const { Server } = require('socket.io');
 const routes = require('./controllers');
-exphbs.hotreload();
-
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+exphbs.hotreload();
 
 // Initialize Express and set up port
 const app = express();
@@ -27,7 +29,7 @@ const hbs = exphbs.create({
 const sess = {
 	secret: 'Super secret secret',
 	cookie: {
-		maxAge: 300000,
+		maxAge: 3600000,
 		httpOnly: true,
 		secure: false,
 		sameSite: 'strict',
@@ -92,7 +94,8 @@ io.on('connect', (socket) => {
 });
 
 // Sync the database and start the server
-app.listen(PORT, () => {
-	console.log(`App listening on port ${PORT}!`);
-	sequelize.sync({ force: false });
+sequelize.sync({ force: false }).then(() => {
+	server.listen(PORT, () => {
+		console.log(`App listening on port ${PORT}!`);
+	});
 });

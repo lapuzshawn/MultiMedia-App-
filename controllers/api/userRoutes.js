@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
 	}
 });
 
-// POST /api/users/logout is a logout route for an existing user
+// POST /api/user/logout is a logout route for an existing user
 router.post('/logout', (req, res) => {
 	if (req.session.loggedIn) {
 		req.session.destroy(() => {

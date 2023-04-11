@@ -3,11 +3,13 @@ const logout = async function () {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 	});
-	console.log(response)
+	console.log(response);
 	if (response.ok) {
 		document.location.replace('/login');
 	} else {
 		alert('Failed to log out');
 	}
 };
-document.querySelector('#logout-button').addEventListener('click', logout);
+
+const logout_link = document.querySelector('#logout-link');
+if (logout_link) logout_link.addEventListener('click', logout);
