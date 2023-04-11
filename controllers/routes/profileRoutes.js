@@ -79,7 +79,10 @@ router.get("/:id", withAuth, async (req, res) => {
 
     res.render("pages/profile", {
       title: "Profile",
+      isIncludeHeader: true,
       user,
+      loggedIn: !!user.userId,
+      isProfilePage: true,
       recentposts,
       socialLinks,
       profile,

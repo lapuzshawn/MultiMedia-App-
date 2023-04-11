@@ -1,4 +1,4 @@
-{{#if isHome}}
+{{#if isIncludeHeader}}
 <nav>
   <form action="/search">
     <input type="search" name="query" id="search-input" placeholder="SEARCH FOR USERS" />
@@ -8,9 +8,12 @@
     <a href="/admin/{{user.userId}}">
       <button id="admin" type="submit">Admin</button>
     </a>
-    <a href="/profile/{{user.userId}}">
-      <button id="profile" type="submit">Profile</button>
-    </a>
+      {{#if isProfilePage}}
+      {{else}}
+      <a href="/profile/{{user.userId}}">
+        <button id="profile" type="submit">Profile</button>
+      </a>
+      {{/if}}
     <a href="#">
       <button id="logout-link" type="submit">Logout</button>
     </a>

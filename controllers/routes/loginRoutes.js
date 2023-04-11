@@ -6,7 +6,7 @@ router.get("/login", (req, res) => {
     return;
   }
   res.render("pages/login", {
-    isHome: false,
+    isIncludeHeader: false,
     title: "Login",
   });
 });
@@ -17,7 +17,7 @@ router.get("/signup", (req, res) => {
     return;
   }
   res.render("pages/signup", {
-    isHome: false,
+    isIncludeHeader: false,
     title: "Register",
   });
 });
