@@ -14,9 +14,7 @@ router.get('/login', (req, res) => {
 		res.redirect('/');
 		return;
 	}
-	res.render('login', {
-		isHome: false,
-	});
+	res.render('login', {});
 });
 
 router.get('/signup', (req, res) => {
@@ -24,17 +22,17 @@ router.get('/signup', (req, res) => {
 		res.redirect('/');
 		return;
 	}
-	res.render('signup', {
-		isHome: false,
-	});
+	res.render('signup', {});
 });
 
 router.get('/protected', withAuth, (req, res) => {
 	res.render('protected');
 });
 
+// GET request to render a chat room
 router.get('/chat', withAuth, (req, res) => {
-	res.render('chat');
+	const { room } = req.query;
+	res.render('chat', { roomName: room });
 });
 
 module.exports = router;

@@ -3,14 +3,10 @@ const { User } = require('../../models');
 const { Op } = require('sequelize');
 
 // POST /api/users is a registration route for creating a new user
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
 	try {
 		console.log(req.body.name);
-		const newUser = await User.create({
-			name: req.body.name,
-			username: req.body.username,
-			password: req.body.password,
-		});
+		const newUser = await User.create(req.body);
 
 		req.session.save(() => {
 			req.session.userId = newUser.id;
@@ -74,13 +70,13 @@ router.post('/logout', (req, res) => {
 });
 
 //get route for getting the user's name
-router.get('/users/search', async (req, res) => {
+router.get('/search', async (req, res) => {
 	try {
-		const query = req.query.search;
+		const input = req.query.search;
 		const users = await User.findAll({
 			where: {
 				name: {
-					[Op.like]: `%${query}%`,
+					[Op.like]: `%${input}%`,
 				},
 			},
 		});
@@ -90,5 +86,31 @@ router.get('/users/search', async (req, res) => {
 		res.status(500).json({ error: 'Internal server error' });
 	}
 });
+
+//get route for user id
+router.get('/user/:id', async (req, res) => {
+	try {
+		const userData = await User.findByPk(req.params.id);
+		res.status(200).json(userData);
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
+// In your routes file
+
+//get route for finding user by username
+router.get('/current-user', async (req, res) => {
+	try {
+		const username = req.session.username;
+
+		res.json(username);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: 'Internal server error' });
+	}
+});
+
+module.exports = router;
 
 module.exports = router;

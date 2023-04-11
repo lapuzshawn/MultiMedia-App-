@@ -8,7 +8,12 @@ const { Server } = require('socket.io');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const formatMessage = require('./utils/formateDate');
 exphbs.hotreload();
+
+// Import your User model
+const User = require('./models/User');
+const { time } = require('console');
 
 // Initialize Express and set up port
 const app = express();
@@ -56,11 +61,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 // Set up Socket.IO events
-io.on('connection', (socket) => {
-	console.log('A user has connected.');
-	socket.on('chat message', (message) => {
-		socket.broadcast.emit('receive-message', message);
-		console.log('message: ' + message);
+io.on('connect', (socket) => {
+	// Handle joining a room
+	socket.on('join-room', (data) => {
+		const roomName = data.roomName;
+		const username = data.username;
+
+		socket.join(roomName);
+		console.log(`${username} has joined`, roomName);
+
+		socket.emit(
+			'message',
+			`Welcome to the chat room ${roomName}`,
+			'',
+			'Chatbot',
+		);
+
+		socket
+			.to(roomName)
+			.emit('message', `${username} has joined the chat`, '', '');
+
+		console.log(`A user has connected. ${socket.id}`);
+	});
+
+	// Handle new messages
+	socket.on('new-message', (message, time, username, roomName) => {
+		socket.broadcast.to(roomName).emit('message', message, time, username);
+	});
+
+	// Handle leaving a room
+	socket.on('leave-room', (room) => {
+		socket.leave(room);
+		io.to(room).emit('message', 'A user has left the room');
 	});
 });
 
