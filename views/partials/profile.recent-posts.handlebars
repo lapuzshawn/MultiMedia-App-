@@ -1,0 +1,16 @@
+
+<h2>{{profile.name}}'s Recent Posts</h2>
+<div class="recent-posts">
+  {{#each recentposts}}
+    <figure class="recent-posts_post">
+      <a href={{this.link}}>
+        <img class="recent-posts_post_img" src={{this.image}} alt="post image" />
+      </a>
+      <span class="post-date">{{this.createdAt}}</span>
+      <figcaption>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta eos
+        expedita quis perspiciatis dicta qui magni?
+      </figcaption>
+    </figure>
+  {{/each}}
+</div>

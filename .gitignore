@@ -1,5 +1,6 @@
 # ignore these files 
 .env
 .env*.local
+
 .DS_Store
 /node_modules

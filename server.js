@@ -3,17 +3,11 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars-hotreload');
-const http = require('http');
-const { Server } = require('socket.io');
 const routes = require('./controllers');
-const sequelize = require('./config/connection');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const formatMessage = require('./utils/formateDate');
 exphbs.hotreload();
 
-// Import your User model
-const User = require('./models/User');
-const { time } = require('console');
+const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Initialize Express and set up port
 const app = express();
@@ -33,7 +27,7 @@ const hbs = exphbs.create({
 const sess = {
 	secret: 'Super secret secret',
 	cookie: {
-		maxAge: 3600000,
+		maxAge: 300000,
 		httpOnly: true,
 		secure: false,
 		sameSite: 'strict',
@@ -49,8 +43,9 @@ const sess = {
 app.use(session(sess));
 
 // Set up Handlebars as the view engine
-app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.engine('handlebars', hbs.engine);
+app.set('views', path.join(__dirname, '/views'));
 
 // Set up middleware for parsing request bodies and serving static files
 app.use(express.json());
@@ -97,8 +92,7 @@ io.on('connect', (socket) => {
 });
 
 // Sync the database and start the server
-sequelize.sync({ force: false }).then(() => {
-	server.listen(PORT, () => {
-		console.log(`App listening on port ${PORT}!`);
-	});
+app.listen(PORT, () => {
+	console.log(`App listening on port ${PORT}!`);
+	sequelize.sync({ force: false });
 });

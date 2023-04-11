@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html lang='en'>
 	<head>
 		<meta charset='UTF-8' />
@@ -10,9 +11,21 @@
 			href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
 			rel='stylesheet'
 		/>
+=======
+<html lang="en">
+>>>>>>> 2dba7ae5a12b405f76f409bc4bb09a8b52b8d513
 
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/login&signup.css" />
+  <link rel="stylesheet" href="/css/profile.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
 
+<<<<<<< HEAD
 	<body>
 		{{#if isHome}}
 			<nav>
@@ -115,11 +128,30 @@
 				nav { display: flex; justify-content: center; align-items: center;
 				border-bottom: 2px solid;} h1 {font-size: 45px; font-weight: lighter;
 				color: black;}
+=======
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/login&signup.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
 
-			</style>
-			<nav>
-				<a href='/' style='text-decoration: none;'><h1>Multi-Media</h1></a>
+  </head>
+>>>>>>> 2dba7ae5a12b405f76f409bc4bb09a8b52b8d513
 
+<body>
+  {{> header}}
+  <main>
+    {{{body}}}
+  </main>
+
+  <script src="/js/logout.js"></script>
+  <script src="/js/darkMode.js"></script>
+</body>
+
+<<<<<<< HEAD
 			</nav>
 		{{/if}}
 		<main>
@@ -127,4 +159,6 @@
 		</main>
 
 	</body>
+=======
+>>>>>>> 2dba7ae5a12b405f76f409bc4bb09a8b52b8d513
 </html>
