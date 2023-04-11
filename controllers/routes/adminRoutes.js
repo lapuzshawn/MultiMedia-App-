@@ -73,7 +73,7 @@ router.get("/:id", withAuth, async (req, res) => {
 
     const user = req.session;
 
-    const profile = await loadUserProfile(userId);
+    const admin = await loadUserProfile(userId);
     const socialLinks = await loadUserSocialLinks(userId);
     const recentposts = await loadUserRecentPosts(userId);
 
@@ -82,7 +82,7 @@ router.get("/:id", withAuth, async (req, res) => {
       user,
       recentposts,
       socialLinks,
-      profile,
+      admin,
       viewMyProfile: user.userId === profile.userId,
     });
   } catch (err) {
