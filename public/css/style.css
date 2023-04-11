@@ -12,6 +12,7 @@ nav {
 	background-image: linear-gradient(to bottom, #436905, #5c446e), linear-gradient(to bottom, #fff, #fff);
     background-position: 0 0, 0 100px;
     background-repeat: repeat-x;
+	color: #d3d3d3;
 }
 #darkmode-toggle {
 	width: 0;
