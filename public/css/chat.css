@@ -58,3 +58,21 @@
 .input-area button:hover {
 	background-color: #0062cc;
 }
+
+.autocomplete {
+	position: relative;
+	display: inline-block;
+}
+#autocomplete-results {
+	position: absolute;
+	z-index: 999;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background-color: white;
+	border: 1px solid #ccc;
+	border-top: none;
+	max-height: 200px;
+	overflow-y: auto;
+	display: none;
+}

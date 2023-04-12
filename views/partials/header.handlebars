@@ -1,8 +1,10 @@
+
 {{#if isIncludeHeader}}
 <nav>
-  <form action="/search">
-    <input type="search" name="query" id="search-input" placeholder="SEARCH FOR USERS" />
-  </form>
+		<div class='autocomplete'>
+			<input type="search" name="query" id="search-input" placeholder="SEARCH FOR USERS" />
+			<div id='autocomplete-results'></div>
+		</div>
   <div class="login-signup">
     {{#if loggedIn}}
   
