@@ -75,20 +75,21 @@ router.get('/search', async (req, res) => {
 		const input = req.query.search;
 		const users = await User.findAll({
 			where: {
-				name: {
+				username: {
 					[Op.like]: `%${input}%`,
 				},
 			},
 		});
 		res.json(users);
+		console.log(users);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: 'Internal server error' });
 	}
 });
 
-//get route for user id
-router.get('/user/:id', async (req, res) => {
+// get route for user id
+router.get('/:id', async (req, res) => {
 	try {
 		const userData = await User.findByPk(req.params.id);
 		res.status(200).json(userData);
@@ -97,9 +98,26 @@ router.get('/user/:id', async (req, res) => {
 	}
 });
 
-// In your routes file
+// Route to find user's id using their username
+router.get('/username/:username', async (req, res) => {
+	try {
+		const user = await User.findOne({
+			where: {
+				username: req.params.username,
+			},
+		});
+		if (user) {
+			res.json(user);
+		} else {
+			res.json({ message: 'No user was found with that username' });
+		}
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: 'Internal server error' });
+	}
+});
 
-//get route for finding user by username
+// get route for finding current user by username
 router.get('/current-user', async (req, res) => {
 	try {
 		const username = req.session.username;
