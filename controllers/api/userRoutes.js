@@ -88,6 +88,7 @@ router.get('/search', async (req, res) => {
 	}
 });
 
+
 // get route for user id
 router.get('/:id', async (req, res) => {
 	try {
@@ -131,4 +132,3 @@ router.get('/current-user', async (req, res) => {
 
 module.exports = router;
 
-module.exports = router;
