@@ -78,6 +78,9 @@ io.on('connect', (socket) => {
 			.to(roomName)
 			.emit('message', `${username} has joined the chat`, '', '');
 
+		// Store the roomName in the socket's data object
+		socket.data.roomName = roomName;
+		socket.data.username = username;
 		console.log(`A user has connected. ${socket.id}`);
 	});
 
@@ -87,9 +90,14 @@ io.on('connect', (socket) => {
 	});
 
 	// Handle leaving a room
-	socket.on('leave-room', (room) => {
-		socket.leave(room);
-		io.to(room).emit('message', 'A user has left the room');
+	socket.on('disconnect', () => {
+		const username = socket.data.username;
+		const roomName = socket.data.roomName;
+		if (roomName) {
+			socket
+				.to(roomName)
+				.emit('message', `${username} has left the chat`, '', '');
+		}
 	});
 });
 

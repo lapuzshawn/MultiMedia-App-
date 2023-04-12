@@ -3,7 +3,7 @@ const { User } = require('../../models');
 const { Op } = require('sequelize');
 
 // POST /api/users is a registration route for creating a new user
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
 	try {
 		console.log(req.body.name);
 		const newUser = await User.create(req.body);
@@ -118,17 +118,14 @@ router.get('/username/:username', async (req, res) => {
 });
 
 // get route for finding current user by username
-router.get('/current-user', async (req, res) => {
+router.get('/current/user', async (req, res) => {
 	try {
 		const username = req.session.username;
-
 		res.json(username);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ message: 'Internal server error' });
 	}
 });
-
-module.exports = router;
 
 module.exports = router;
