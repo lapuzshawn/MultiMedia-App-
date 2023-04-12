@@ -27,10 +27,15 @@
     "express-handlebars-hotreload": "^0.0.6",
     "express-session": "^1.17.3",
     "mysql2": "^3.2.0",
-    "sequelize": "^6.30.0"
+    "sequelize": "^6.30.0",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "hbs": "^4.2.0",
+    "nodemon": "^2.0.22",
+    "reload": "^3.2.1"
+    
   },
   "engines": {
     "node": "16.x"

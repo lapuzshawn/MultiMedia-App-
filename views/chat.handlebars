@@ -1,0 +1,15 @@
+<link rel='stylesheet' href='css/chat.css' />
+<div class="room-name">{{roomName}}</div>
+<div class='messenger-box'>
+	<div class='chat-area'>
+
+	</div>
+	<div class='input-area'>
+		<form>
+			<input id="chat-input" type="text"  onkeydown="sendMessage(event)" placeholder='Type your message here...'></input>
+		</form>
+			<button id="send-button"  >Send</button>
+	</div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/client.js"></script>
