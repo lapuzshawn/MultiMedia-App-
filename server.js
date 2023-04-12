@@ -8,6 +8,7 @@ const { Server } = require('socket.io');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const getTime = require('./utils/getTime');
 
 exphbs.hotreload();
 
@@ -60,9 +61,12 @@ app.use(routes);
 // Set up Socket.IO events
 io.on('connect', (socket) => {
 	// Handle joining a room
+	const Chatbot = 'Chatbot';
+
 	socket.on('join-room', (data) => {
 		const roomName = data.roomName;
 		const username = data.username;
+		const time = data.time;
 
 		socket.join(roomName);
 		console.log(`${username} has joined`, roomName);
@@ -70,13 +74,13 @@ io.on('connect', (socket) => {
 		socket.emit(
 			'message',
 			`Welcome to the chat room ${roomName}`,
-			'',
-			'Chatbot',
+			time,
+			Chatbot,
 		);
 
 		socket
 			.to(roomName)
-			.emit('message', `${username} has joined the chat`, '', '');
+			.emit('message', `${username} has joined the chat`, time, Chatbot);
 
 		// Store the roomName in the socket's data object
 		socket.data.roomName = roomName;
@@ -93,10 +97,11 @@ io.on('connect', (socket) => {
 	socket.on('disconnect', () => {
 		const username = socket.data.username;
 		const roomName = socket.data.roomName;
+		const time = getTime();
 		if (roomName) {
 			socket
 				.to(roomName)
-				.emit('message', `${username} has left the chat`, '', '');
+				.emit('message', `${username} has left the chat`, time, Chatbot);
 		}
 	});
 });
