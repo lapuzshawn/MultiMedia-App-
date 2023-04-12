@@ -1,5 +1,5 @@
 body {
-  background-image: linear-gradient(to bottom, #abf62d, #cb96f1), linear-gradient(to bottom, #fff, #fff);
+  background-image: linear-gradient(to bottom, #abf62d, #d6a3fb), linear-gradient(to bottom, #fff, #fff);
   background-position: 0 0, 0 100px;
   background-repeat: repeat-x;
 }
@@ -32,6 +32,7 @@ body {
   justify-content: center;
   text-align: center;
   margin: 30px 0 0 0;
+  font-weight: bold;
 }
 
 .profile .profile-header_description {
@@ -102,6 +103,13 @@ body {
   font-size: 20px;
 }
 
+.profile h2 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+}
 /* .profile .recent-posts {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -117,13 +125,15 @@ body {
 }
 
 .profile .recent-posts_post {
-  flex: auto;
-  height: 250px;
+  flex: 1;
+  /* height: 250px;
   min-width: 150px;
-  margin: 0 8px 8px 0; /* Some gutter */
+  margin: 0 8px 8px 0; Some gutter */
+  margin: 8px;
+  height: auto;
 }
 
-.profile .recent-posts_post:nth-child(4n+1) {
+/* .profile .recent-posts_post:nth-child(4n+1) {
   width: 250px;
 }
 .profile .recent-posts_post:nth-child(4n+1):nth-child(4n+2) {
@@ -134,10 +144,18 @@ body {
 }
 .profile .recent-posts_post:nth-child(4n+1):nth-child(4n+4) {
   width: 380px;
-}
+} */
+
+.profile .recent-posts_post:nth-child(odd) {
+  flex-basis: calc(33.33% - 16px); /* Set width of odd posts to 33.33% */
+  }
+  
+  .profile .recent-posts_post:nth-child(even) {
+  flex-basis: calc(44.44% - 16px); /* Set width of even posts to 66.66% */
+  }
 
 .profile .recent-posts_post_img {
   width: 100%;
-   object-fit: contain;
+   object-fit: cover;
    border-radius: 15px;
 }
