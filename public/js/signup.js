@@ -26,6 +26,9 @@ const signupFormHandler = async function (event) {
 	}
 };
 
-document
-	.querySelector('#signup-submit')
-	.addEventListener('submit', signupFormHandler);
+// document
+// 	.querySelector('#signup-submit')
+// 	.addEventListener('submit', signupFormHandler);
+
+const signup_form = document.querySelector('#signup-form')
+if (signup_form) signup_form.addEventListener('submit', signupFormHandler);
