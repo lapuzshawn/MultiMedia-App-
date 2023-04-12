@@ -1,10 +1,17 @@
 
 <div class="social-links">
-  <h2 class="social-links_title">{{profile.name}}'s links:</h2>
+  <h2 class="social-links_title">{{admin.name}}'s links:</h2>
   <ul class="social-links_list">
     {{#each socialLinks}}
       <li class="social-links_list_item">
-        <a class="social-links_list_item_link" href="{{this.link}}">{{this.label}}</a>
+        <a class="social-links_list_item_link">{{this.label}}  </a>
+      {{!-- {{this.label}} {{this.link}}   --}}
+      <input
+      id="name-input-update"
+      type="name"
+      name="link"
+      placeholder="{{this.link}}"
+      required="">
       </li>
     {{/each}}
   </ul>

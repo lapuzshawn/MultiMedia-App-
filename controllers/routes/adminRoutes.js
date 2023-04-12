@@ -83,7 +83,63 @@ router.get("/:id", withAuth, async (req, res) => {
       recentposts,
       socialLinks,
       admin,
-      viewMyProfile: user.userId === profile.userId,
+      viewMyProfile: user.userId === admin.userId,
+    });
+  } catch (err) {
+    res.status(400).json({ message: "Invalid Request" });
+  }
+});
+
+
+/*Testing PUT routes -SL*/
+router.put("/:id/update-profile", withAuth, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = req.session;
+
+    // Update user profile
+    const updatedProfile = await updateProfile(userId, req.body);
+
+    // Send response with updated profile data
+    res.status(200).json({
+      message: "Profile updated successfully",
+      profile: updatedProfile,
+    });
+  } catch (err) {
+    res.status(400).json({ message: "Invalid Request" });
+  }
+});
+
+router.put("/:id/update-social-links", withAuth, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = req.session;
+
+    // Update user social links
+    const updatedSocialLinks = await updateSocialLinks(userId, req.body);
+
+    // Send response with updated social links data
+    res.status(200).json({
+      message: "Social links updated successfully",
+      socialLinks: updatedSocialLinks,
+    });
+  } catch (err) {
+    res.status(400).json({ message: "Invalid Request" });
+  }
+});
+
+router.put("/:id/update-recent-posts", withAuth, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = req.session;
+
+    // Update user recent posts
+    const updatedRecentPosts = await updateRecentPosts(userId, req.body);
+
+    // Send response with updated recent posts data
+    res.status(200).json({
+      message: "Recent posts updated successfully",
+      recentPosts: updatedRecentPosts,
     });
   } catch (err) {
     res.status(400).json({ message: "Invalid Request" });
