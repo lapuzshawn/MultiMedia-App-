@@ -11,13 +11,6 @@ const messageInput = document.querySelector('#chat-input');
 const sendButton = document.querySelector('#send-button');
 const display = document.querySelector('.chat-area');
 
-const now = new Date();
-const time = now.toLocaleTimeString([], {
-	hour: '2-digit',
-	minute: '2-digit',
-	hour12: true,
-});
-
 //Getting the room name
 const roomName = document.querySelector('.room-Name').textContent;
 const leaveRoom = document.querySelector('#leave-chat');
@@ -25,7 +18,12 @@ const leaveRoom = document.querySelector('#leave-chat');
 //emitting that a user has joined the room
 const joinRoom = async () => {
 	const username = await getCurrentUser();
-	socket.emit('join-room', { roomName: roomName, username: username });
+	const time = getTime();
+	socket.emit('join-room', {
+		roomName: roomName,
+		username: username,
+		time: time,
+	});
 	console.log(`${username} has joined the room`);
 };
 joinRoom();
@@ -36,14 +34,14 @@ window.addEventListener('beforeunload', async (event) => {
 
 socket.on('disconnect', (username) => {
 	const message = `${username} has left the room`;
-	displaySentMessage(message);
+	const time = getTime();
+	displaySentMessage(message, time);
 });
 
 //On receiving 'join-rooom' emit
-socket.on('join-room', (username) => {
-	console.log('user has joined the room');
+socket.on('join-room', (username, time) => {
 	const message = `${username} has joined the room`;
-	displaySentMessage(message, time);
+	displaySentMessage(message, time, '');
 });
 // Define the function that sends a message
 const sendMessage = async (event) => {
@@ -52,6 +50,8 @@ const sendMessage = async (event) => {
 
 		// Get the message text from the input
 		const message = messageInput.value.trim();
+
+		const time = getTime();
 
 		//Fetch the user's username
 		const username = await getCurrentUser();
@@ -143,3 +143,12 @@ async function getCurrentUser() {
 
 	return username;
 }
+const getTime = () => {
+	const now = new Date();
+	const time = now.toLocaleTimeString([], {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: true,
+	});
+	return time;
+};
