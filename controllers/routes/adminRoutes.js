@@ -16,17 +16,17 @@ function loadUserSocialLinks(userId) {
   return [
     {
       label: "Facebook",
-      link: "https://facebook.com",
+      link: "https://facebook.com/",
       icon: "fa fa-book",
     },
     {
       label: "Instagram",
-      link: "https://instagram.com",
+      link: "https://instagram.com/",
       icon: "fa fa-book",
     },
     {
       label: "Twitter",
-      link: "https://twitter.com",
+      link: "https://twitter.com/",
       icon: "fa fa-book",
     },
   ];

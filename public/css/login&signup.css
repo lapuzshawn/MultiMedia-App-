@@ -14,7 +14,9 @@
 
 #username-input-login,
 #password-input-login,
-#name-input-signup,
+#fname-input-signup,
+#lname-input-signup,
+#email-input-signup,
 #username-input-signup,
 #password-input-signup {
 	border: 2px solid #333;

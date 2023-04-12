@@ -4,14 +4,23 @@
         <h2 class="title">Sign Up</h2>
         <div class="input-field">
         <input
-            id="name-input-signup"
+            id="fname-input-signup"
             type="name"
-            name="name"
-            placeholder="Your name"
+            name="firstname"
+            placeholder="First Name"
             required=""
         >
-        </div>
+        <input
+            id="lname-input-signup"
+            type="name"
+            name="lastname"
+            placeholder="Last Name"
+            required=""
+        >
         <br></br>
+        </div>
+
+        </div>
         <div class="input-field">
         <input
             id="username-input-signup"
@@ -20,8 +29,15 @@
             placeholder="Username"
             required=""
         >
-        </div>
         <br></br>
+        <input
+            id="email-input-signup"
+            type="text"
+            name="email"
+            placeholder="Email"
+            required=""
+        >
+        </div>
         <div class="input-field">
         <input
             id="password-input-signup"
@@ -32,6 +48,7 @@
         >
         </div>
         <br></br>
+        </div>
     <button type="submit" id="signup-submit">Sign Up</button>
     <p>Already have an account? <a href="/login">Sign in</a></p>
     </form>
