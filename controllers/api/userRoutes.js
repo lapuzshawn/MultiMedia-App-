@@ -3,7 +3,7 @@ const { User } = require('../../models');
 const { Op } = require('sequelize');
 
 // POST /api/users is a registration route for creating a new user
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
 	try {
 		console.log(req.body.name);
 		const newUser = await User.create(req.body);
@@ -88,7 +88,6 @@ router.get('/search', async (req, res) => {
 	}
 });
 
-
 // get route for user id
 router.get('/:id', async (req, res) => {
 	try {
@@ -119,10 +118,9 @@ router.get('/username/:username', async (req, res) => {
 });
 
 // get route for finding current user by username
-router.get('/current-user', async (req, res) => {
+router.get('/current/user', async (req, res) => {
 	try {
 		const username = req.session.username;
-
 		res.json(username);
 	} catch (error) {
 		console.error(error);
@@ -131,4 +129,3 @@ router.get('/current-user', async (req, res) => {
 });
 
 module.exports = router;
-

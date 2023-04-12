@@ -20,7 +20,7 @@ const time = now.toLocaleTimeString([], {
 
 //Getting the room name
 const roomName = document.querySelector('.room-Name').textContent;
-console.log(roomName);
+const leaveRoom = document.querySelector('#leave-chat');
 
 //emitting that a user has joined the room
 const joinRoom = async () => {
@@ -29,6 +29,15 @@ const joinRoom = async () => {
 	console.log(`${username} has joined the room`);
 };
 joinRoom();
+
+window.addEventListener('beforeunload', async (event) => {
+	socket.emit('disconnect', roomName, username);
+});
+
+socket.on('disconnect', (username) => {
+	const message = `${username} has left the room`;
+	displaySentMessage(message);
+});
 
 //On receiving 'join-rooom' emit
 socket.on('join-room', (username) => {
@@ -128,7 +137,7 @@ function displayMessage(message, time, username) {
 
 //Fetch request to get the user's username
 async function getCurrentUser() {
-	const response = await fetch('/api/user/current-user');
+	const response = await fetch('/api/user/current/user');
 	const data = await response.json();
 	const username = data;
 

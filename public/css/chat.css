@@ -1,4 +1,6 @@
-.room-name {
+.room-box {
+	display: flex;
+	justify-content: space-between;
 	border: 1px solid #ccc;
 	border-top-right-radius: 10px;
 	border-top-left-radius: 10px;
@@ -8,6 +10,22 @@
 	width: 700px;
 	margin-top: 30px;
 	font-size: 30px;
+}
+
+#leave-chat {
+	background-color: #585656;
+	border-radius: 10px;
+	color: #fff;
+	border: none;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.room-box button:hover {
+	background-color: red;
 }
 
 .messenger-box {
@@ -24,24 +42,20 @@
 	flex-grow: 1;
 	padding: 10px;
 	overflow-y: auto;
+	background-color: white;
 }
 
 .input-area {
 	display: flex;
+	margin-bottom: -18px;
 	border-top: 1px solid #ccc;
+	height: 80px;
 }
 .input-area form {
 	width: 100%;
 }
-.input-area input {
-	border: none;
-	padding: 10px;
-	flex-grow: 1;
-	font-size: 16px;
-	width: 80%;
-}
 
-.input-area input:focus {
+#chat-input :focus {
 	outline: none;
 }
 
@@ -50,13 +64,23 @@
 	color: #fff;
 	border: none;
 	padding: 10px;
+	margin-bottom: 10px;
 	font-size: 16px;
 	cursor: pointer;
 	transition: background-color 0.2s ease-in-out;
+	width: 100px;
 }
 
 .input-area button:hover {
 	background-color: #0062cc;
+}
+
+#chat-input {
+	width: 100%;
+	padding-bottom: 10px;
+	border: none;
+	padding: 18px;
+	font-size: 16px;
 }
 
 .autocomplete {

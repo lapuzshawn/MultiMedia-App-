@@ -57,6 +57,7 @@ autocompleteResults.addEventListener('click', (event) => {
 
 const messengerButton = document.querySelector('#messenger');
 const newMessageModal = document.querySelector('#joinRoomModal');
+const roomName = document.querySelector('#roomName');
 
 messengerButton.addEventListener('click', () => {
 	newMessageModal.classList.toggle('hidden');
@@ -64,11 +65,20 @@ messengerButton.addEventListener('click', () => {
 
 const socket = io();
 
+//Eventlistener for join room button
 const joinRoomButton = document.querySelector('#joinRoomButton');
 joinRoomButton.addEventListener('click', () => {
 	const roomName = document.querySelector('#roomName').value;
 	if (roomName !== '') {
-		toggleModal('joinRoomModal');
+		window.location.href = `/chat?room=${roomName}`;
+		socket.emit('join-room', roomName);
+	}
+});
+
+//Eventlistener for enter key
+roomName.addEventListener('keydown', (event) => {
+	const roomName = document.querySelector('#roomName').value;
+	if (event.keyCode === 13) {
 		window.location.href = `/chat?room=${roomName}`;
 		socket.emit('join-room', roomName);
 	}
