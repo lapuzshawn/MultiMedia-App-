@@ -32,39 +32,39 @@ router.get('/:id', async (req, res) => {
 });
 
 /* Update a specific user */
-router.put("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { name, facebookUrl, instagramUrl, twitterUrl } = req.body;
+router.put('/:id', async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const { name, facebookUrl, instagramUrl, twitterUrl } = req.body;
 
-    const user = req.session;
+		const user = req.session;
 
-    const entity = await User.findOne({ where: { id: id } });
+		const entity = await User.findOne({ where: { id: id } });
 
-    // User does not exist
-    if (!entity) {
-      return next();
-    }
+		// User does not exist
+		if (!entity) {
+			return next();
+		}
 
-    if (user.userId !== entity.id) {
-      const error = new Error("Permission denied");
-      return next(error);
-    }
+		if (user.userId !== entity.id) {
+			const error = new Error('Permission denied');
+			return next(error);
+		}
 
-    const updatedEntity = User.update(
-      {
-        name: name,
-        facebookUrl: facebookUrl,
-        instagramUrl: instagramUrl,
-        twitterUrl: twitterUrl,
-      },
-      { where: { id: id } }
-    );
+		const updatedEntity = User.update(
+			{
+				name: name,
+				facebookUrl: facebookUrl,
+				instagramUrl: instagramUrl,
+				twitterUrl: twitterUrl,
+			},
+			{ where: { id: id } },
+		);
 
-    res.json(updatedEntity);
-  } catch (error) {
-    next(error);
-  }
+		res.json(updatedEntity);
+	} catch (error) {
+		next(error);
+	}
 });
 
 // Route to find user's id using their username
