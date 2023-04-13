@@ -1,0 +1,18 @@
+<div class="bio-links">
+  <h2 class="bio-links_title">{{admin.name}}'s Claimed Links:</h2>
+  <ul class="bio-links_list">
+    {{#each bioLinks}}
+      <li class="bio-links_list_item">
+        <a class="bio-links_list_item_link" href="{{this.linkUrl}}">{{this.linkUrl}}</a>
+        {{#each this.links}}
+          <div class="bio-links-sublink">+ {{this.linkUrl}}</div>
+        {{/each}}
+        <span>Link Url</span>
+        <input type="text" id="bio-link-link-{{this.id}}">
+        <span>Link Label</span>
+        <input type="text" id="bio-link-label-{{this.id}}">
+        <button onClick="addMoreLinkToBio({{this.id}})">Add Link</button>
+      </li>
+    {{/each}}
+  </ul>
+</div>

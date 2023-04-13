@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Bio } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 async function loadUserProfile(userId) {
@@ -8,63 +8,46 @@ async function loadUserProfile(userId) {
     userId: user.id,
     name: user.name,
     username: user.username,
-    avatar: "https://www.w3schools.com/w3images/avatar1.png"
+    avatar: "https://www.w3schools.com/w3images/avatar1.png",
   };
 }
 
-function loadUserSocialLinks(userId) {
+async function loadUserSocialLinks(userId) {
+  const user = await User.findOne({ where: { id: userId } });
   return [
     {
       label: "Facebook",
-      link: "https://facebook.com",
-      icon: "fa fa-book",
+      isEnable: !!user.facebookUrl,
+      link: user.facebookUrl,
     },
     {
       label: "Instagram",
-      link: "https://instagram.com",
-      icon: "fa fa-book",
+      isEnable: !!user.instagramUrl,
+      link: user.instagramUrl,
     },
     {
       label: "Twitter",
-      link: "https://twitter.com",
-      icon: "fa fa-book",
+      isEnable: !!user.twitterUrl,
+      link: user.twitterUrl,
     },
   ];
 }
 
-function loadUserRecentPosts(userId) {
-  return [
-    {
+async function loadUserRecentPosts(req, userId) {
+  const bios = await Bio.findAll({ where: { userId: userId } });
+
+  var hostUrl = req.protocol + "://" + req.get("host") + "/bio/";
+
+  return bios.map((e) => {
+    return {
+      id: e.id,
       image:
+        e.thumbnail ||
         "https://res.cloudinary.com/dkfptto8m/image/upload/v1674371886/logrocket-css-masonry/10.jpg",
-      link: "abc",
+      link: hostUrl + e.linkUrl,
       createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674344289/logrocket-css-masonry/8.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674373487/logrocket-css-masonry/window.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674344282/logrocket-css-masonry/4.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674344280/logrocket-css-masonry/7.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-  ];
+    };
+  });
 }
 
 router.get("/:id", withAuth, async (req, res) => {
@@ -75,7 +58,7 @@ router.get("/:id", withAuth, async (req, res) => {
 
     const profile = await loadUserProfile(userId);
     const socialLinks = await loadUserSocialLinks(userId);
-    const recentposts = await loadUserRecentPosts(userId);
+    const recentposts = await loadUserRecentPosts(req, userId);
 
     res.render("pages/profile", {
       title: "Profile",
@@ -89,6 +72,7 @@ router.get("/:id", withAuth, async (req, res) => {
       viewMyProfile: user.userId === profile.userId,
     });
   } catch (err) {
+    console.error(err)
     res.status(400).json({ message: "Invalid Request" });
   }
 });

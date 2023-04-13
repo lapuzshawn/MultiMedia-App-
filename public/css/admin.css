@@ -104,14 +104,26 @@ body {
 }
 
 /***** ADMIN *****/ 
-#name-input-update {
+
+.admin-input-update {
   margin-left: 20px;
   padding-left: 10px;
-  
 }
-#name-input-update, #name-input-description {
-  padding-left: 10px;
-  
+
+.admin-update-profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.admin-update-profile-btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  padding: 20px;
 }
 
 /* .admin .recent-posts {
@@ -152,4 +164,58 @@ body {
   width: 100%;
    object-fit: contain;
    border-radius: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+.admin .bio-links_title {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 30px 0 0 0;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.admin .bio-links_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.admin .bio-links_list_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+  font-size: 15px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #000;
+  margin: 15px 0 0 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.admin .bio-links_list_item_link {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-weight: 900;
+  font-size: 20px;
+  /* padding: 10px; */
+}
+
+.admin .bio-links-sublink {
+  margin-left: 30px;
 }

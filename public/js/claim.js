@@ -1,46 +1,44 @@
-// const { User } = require('../../models');
+const inputClaim = document.getElementById("input-claim");
+const claimLinkButton = document.getElementById("claim-link");
+const availabilitySpan = document.getElementById("availability");
 
-const input = document.getElementById('input-claim');
-const span = document.getElementById('availability');
-
-  input.addEventListener('input', () => {
-    const username = input.value.trim();
-
-    if (username === '') {
-      span.innerText = '';
-      return;
+const checkBioAvailable = async function (linkUrl) {
+  try {
+    const bio = await searchBio({linkUrl});
+    console.log("bio ", !!bio)
+    if (!!bio) {
+      return false;
     }
+    return true;
+  } catch (error) {
+    return true;
+  }
+};
 
-    const isUsernameTaken = checkIfUsernameExists(username);
+inputClaim.addEventListener("input", async (e) => {
+  const inputValue = e.target.value.trim();
 
-    if (isUsernameTaken) {
-      span.innerText = 'Not available';
-      span.style.color = 'red';
-    } else {
-      span.innerText = 'Available';
-      span.style.color = 'green';
-    }
-  });
+  if (inputValue === "") {
+    availabilitySpan.innerText = "";
+    return;
+  }
 
-	function checkIfUsernameExists(username) {
-	const existingUsernames = ['john', 'sarah', 'james', 'emma', 'alex'];
+  const isAvailable = await checkBioAvailable(inputValue);
 
-	// FIX: Create an array usernames from social_dc then assign to 'existingUsernames' const
-	/*
-				const existingUsernames = await User.findOne({
-				where: {
-					username: req.params.username,
-				},
-				}); 
-				res.json(username);
-				
-		
-	*/
+  if (isAvailable) {
+    availabilitySpan.innerText = "Available";
+    availabilitySpan.style.color = "green";
+  } else {
+    availabilitySpan.innerText = "Not available";
+    availabilitySpan.style.color = "red";
+  }
+});
 
- 	return existingUsernames.includes(username);
-    // return false;
-	//
-  };
-
-
-  
+claimLinkButton.addEventListener("click", async function(e) {
+  e.preventDefault();
+  const linkBio = inputClaim.value;
+  console.log(linkBio)
+  createBio({ linkUrl: linkBio })
+  availabilitySpan.innerText = "";
+  inputClaim.value = ""
+}, false);

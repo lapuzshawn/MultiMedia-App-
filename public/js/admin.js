@@ -1,16 +1,20 @@
 const adminFormHandler = async function(event) {
     event.preventDefault();
 
-    const nameEl = document.querySelector('#name-input-signup');
-    const usernameEl = document.querySelector('#username-input-signup');
-    const passwordEl = document.querySelector('#password-input-signup');
+    const name = document.getElementById('admin-input-update-name').value;
+    const facebookUrl = document.getElementById('admin-input-update-Facebook').value;
+    const instagramUrl = document.getElementById('admin-input-update-Instagram').value;
+    const twitterUrl = document.getElementById('admin-input-update-Twitter').value;
+    const userId = document.getElementById('admin-user-id').innerText;
 
-    const response = await fetch('/admin', {
+    
+    const response = await fetch(`/api/user/${userId}`, {
         method: "PUT",
         body: JSON.stringify({
-            name: nameEl.value,
-            username: usernameEl.value,
-            password: passwordEl.value,
+            name: name,
+            facebookUrl: facebookUrl,
+            instagramUrl: instagramUrl,
+            twitterUrl: twitterUrl,
         }),
         headers: { 'Content-Type': 'application/json' },
     });
@@ -18,34 +22,19 @@ const adminFormHandler = async function(event) {
     if (response.ok) {
         document.location.replace('/');
     } else {
-        alert('Failed to sign up');
+        alert('Failed to update profile');
     }
 };
 
-const signup_form = document
-    .querySelector('#signup-form')
-if (signup_form) signup_form.addEventListener('submit', signupFormHandler);
+const admin_submit_form = document.querySelector('#admin-submit')
+if (admin_submit_form) admin_submit_form.addEventListener('click', adminFormHandler);
 
 
-/*
-const adminHeader = document.querySelector(".admin-header");
+async function addMoreLinkToBio(bioId) {
+    const linkValue = document.getElementById('bio-link-link-'+bioId).value;
+    const labelValue = document.getElementById('bio-link-label-'+bioId).value;
+    
+    await createLink({ bioId, linkUrl: linkValue, label: labelValue, imageUrl: "" });
 
-const avatarImg = document.querySelector(".admin-header_avatar");
-avatarImg.src = profile.avatar;
-avatarImg.alt = "admin Picture";
-
-const username = document.querySelector(".admin-header_username");
-username.textContent = profile.name;
-
-const description = document.querySelector(".admin-header_description");
-description.textContent = "Influencer | San Francisco, CA";
-
-if (!viewMyProfile) {
-  const messageLink = document.querySelector(".admin-header_message");
-  messageLink.href = `/message/${admin.userId}`;
+    location.reload();
 }
-
-// Show the admin header
-adminHeader.style.display = "block";
-
-*/
