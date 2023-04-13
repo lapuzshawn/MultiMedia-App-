@@ -30,7 +30,7 @@ searchInput.addEventListener('input', async (event) => {
 				autocompleteResults.style.display = 'none';
 			}
 		} catch (error) {
-			res.status(500).json(error);
+			alert("Cannot found user")
 		}
 	}
 });
@@ -42,8 +42,11 @@ searchInput.addEventListener('keydown', async (event) => {
 		const response = await fetch(`/api/user/username/${query}`);
 		const data = await response.json();
 		const userId = data.id;
-		console.log(userId);
-		window.location.href = `/profile/${userId}`;
+		if (!!userId) {
+			window.location.href = `/profile/${userId}`;
+		} else {
+			alert("User not found")
+		}
 	}
 });
 

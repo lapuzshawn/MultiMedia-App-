@@ -3,6 +3,6 @@
   <h1 class="profile-header_username">{{profile.name}}</h1>
   {{#if viewMyProfile}}
   {{else}}
-    <a class="profile-header_message" href="/message/{{profile.userId}}">Message</a>
+    <a class="profile-header_message" href="/message/{{profile.userId}}" onClick="event.preventDefault(); alert('Under construction');">Message</a>
   {{/if}}
 </div>

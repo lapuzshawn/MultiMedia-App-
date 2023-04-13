@@ -20,7 +20,7 @@ const adminFormHandler = async function(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/');
+        location.reload();
     } else {
         alert('Failed to update profile');
     }
