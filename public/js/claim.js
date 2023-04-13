@@ -22,8 +22,7 @@ const span = document.getElementById('availability');
     }
   });
 
-   function checkIfUsernameExists(username) {
-    
+	function checkIfUsernameExists(username) {
 	const existingUsernames = ['john', 'sarah', 'james', 'emma', 'alex'];
 
 	// FIX: Create an array usernames from social_dc then assign to 'existingUsernames' const
@@ -40,6 +39,7 @@ const span = document.getElementById('availability');
 
  	return existingUsernames.includes(username);
     // return false;
+	//
   };
 
 
