@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Bio, Link } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 async function loadUserProfile(userId) {
@@ -8,61 +8,27 @@ async function loadUserProfile(userId) {
     userId: user.id,
     name: user.name,
     username: user.username,
-    avatar: "https://www.w3schools.com/w3images/avatar1.png"
+    avatar: "https://www.w3schools.com/w3images/avatar1.png",
   };
 }
 
-function loadUserSocialLinks(userId) {
+async function loadUserSocialLinks(userId) {
+  const user = await User.findOne({ where: { id: userId } });
   return [
     {
       label: "Facebook",
-      link: "https://facebook.com",
-      icon: "fa fa-book",
+      isEnable: !!user.facebookUrl,
+      link: user.facebookUrl,
     },
     {
       label: "Instagram",
-      link: "https://instagram.com",
-      icon: "fa fa-book",
+      isEnable: !!user.instagramUrl,
+      link: user.instagramUrl,
     },
     {
       label: "Twitter",
-      link: "https://twitter.com",
-      icon: "fa fa-book",
-    },
-  ];
-}
-
-function loadUserRecentPosts(userId) {
-  return [
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674371886/logrocket-css-masonry/10.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674344289/logrocket-css-masonry/8.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674373487/logrocket-css-masonry/window.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674344282/logrocket-css-masonry/4.jpg",
-      link: "abc",
-      createdAt: 123,
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dkfptto8m/image/upload/v1674344280/logrocket-css-masonry/7.jpg",
-      link: "abc",
-      createdAt: 123,
+      isEnable: !!user.twitterUrl,
+      link: user.twitterUrl,
     },
   ];
 }
@@ -73,14 +39,38 @@ router.get("/:id", withAuth, async (req, res) => {
 
     const user = req.session;
 
+    var hostUrl = req.protocol + "://" + req.get("host") + "/bio/";
+
     const admin = await loadUserProfile(userId);
     const socialLinks = await loadUserSocialLinks(userId);
-    const recentposts = await loadUserRecentPosts(userId);
+    const bioLinks = (await Bio.findAll({ where: { userId: userId } })).map(
+      (b) => {
+        return {
+          id: b.id,
+          userId: b.userId,
+          linkUrl: hostUrl + b.linkUrl,
+          thumbnail: b.thumbnail,
+        };
+      }
+    );
+
+    bioLinks.forEach(async (b) => {
+      b.links = (await Link.findAll({ where: { bioId: b.id } })).map((l) => {
+        return {
+          id: l.id,
+          linkUrl: l.linkUrl,
+          label: l.label,
+          imageUrl: l.imageUrl,
+        };
+      });
+    });
+
+    console.log(bioLinks);
 
     res.render("pages/admin", {
       title: "Admin",
       user,
-      recentposts,
+      bioLinks,
       socialLinks,
       admin,
       viewMyProfile: user.userId === admin.userId,
@@ -90,60 +80,59 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 });
 
+// /*Testing PUT routes -SL*/
+// router.put("/:id/update-profile", withAuth, async (req, res) => {
+//   try {
+//     const userId = req.params.id;
+//     const user = req.session;
 
-/*Testing PUT routes -SL*/
-router.put("/:id/update-profile", withAuth, async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const user = req.session;
+//     // Update user profile
+//     const updatedProfile = await updateProfile(userId, req.body);
 
-    // Update user profile
-    const updatedProfile = await updateProfile(userId, req.body);
+//     // Send response with updated profile data
+//     res.status(200).json({
+//       message: "Profile updated successfully",
+//       profile: updatedProfile,
+//     });
+//   } catch (err) {
+//     res.status(400).json({ message: "Invalid Request" });
+//   }
+// });
 
-    // Send response with updated profile data
-    res.status(200).json({
-      message: "Profile updated successfully",
-      profile: updatedProfile,
-    });
-  } catch (err) {
-    res.status(400).json({ message: "Invalid Request" });
-  }
-});
+// router.put("/:id/update-social-links", withAuth, async (req, res) => {
+//   try {
+//     const userId = req.params.id;
+//     const user = req.session;
 
-router.put("/:id/update-social-links", withAuth, async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const user = req.session;
+//     // Update user social links
+//     const updatedSocialLinks = await updateSocialLinks(userId, req.body);
 
-    // Update user social links
-    const updatedSocialLinks = await updateSocialLinks(userId, req.body);
+//     // Send response with updated social links data
+//     res.status(200).json({
+//       message: "Social links updated successfully",
+//       socialLinks: updatedSocialLinks,
+//     });
+//   } catch (err) {
+//     res.status(400).json({ message: "Invalid Request" });
+//   }
+// });
 
-    // Send response with updated social links data
-    res.status(200).json({
-      message: "Social links updated successfully",
-      socialLinks: updatedSocialLinks,
-    });
-  } catch (err) {
-    res.status(400).json({ message: "Invalid Request" });
-  }
-});
+// router.put("/:id/update-recent-posts", withAuth, async (req, res) => {
+//   try {
+//     const userId = req.params.id;
+//     const user = req.session;
 
-router.put("/:id/update-recent-posts", withAuth, async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const user = req.session;
+//     // Update user recent posts
+//     const updatedRecentPosts = await updateRecentPosts(userId, req.body);
 
-    // Update user recent posts
-    const updatedRecentPosts = await updateRecentPosts(userId, req.body);
-
-    // Send response with updated recent posts data
-    res.status(200).json({
-      message: "Recent posts updated successfully",
-      recentPosts: updatedRecentPosts,
-    });
-  } catch (err) {
-    res.status(400).json({ message: "Invalid Request" });
-  }
-});
+//     // Send response with updated recent posts data
+//     res.status(200).json({
+//       message: "Recent posts updated successfully",
+//       recentPosts: updatedRecentPosts,
+//     });
+//   } catch (err) {
+//     res.status(400).json({ message: "Invalid Request" });
+//   }
+// });
 
 module.exports = router;
