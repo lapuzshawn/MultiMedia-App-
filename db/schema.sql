@@ -1,2 +1,13 @@
 DROP DATABASE IF EXISTS social_db;
 CREATE DATABASE social_db;
+
+USE social_db;
+
+CREATE TABLE user (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  links TEXT,
+  PRIMARY KEY (id)
+);
