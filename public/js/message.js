@@ -30,7 +30,7 @@ searchInput.addEventListener('input', async (event) => {
 				autocompleteResults.style.display = 'none';
 			}
 		} catch (error) {
-			alert("Cannot found user")
+			alert('Cannot found user');
 		}
 	}
 });
@@ -45,7 +45,7 @@ searchInput.addEventListener('keydown', async (event) => {
 		if (!!userId) {
 			window.location.href = `/profile/${userId}`;
 		} else {
-			alert("User not found")
+			alert('User not found');
 		}
 	}
 });

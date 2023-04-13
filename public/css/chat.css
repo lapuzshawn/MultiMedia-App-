@@ -100,3 +100,23 @@
 	overflow-y: auto;
 	display: none;
 }
+
+@media only screen and (max-width: 768px) {
+	.room-box {
+		flex-direction: column;
+		align-items: center;
+	}
+	#leave-chat {
+		margin-top: 10px;
+	}
+	.messenger-box {
+		width: 100%;
+		height: 400px;
+	}
+	.chat-area {
+		height: 300px;
+	}
+	.input-area {
+		height: auto;
+	}
+}
